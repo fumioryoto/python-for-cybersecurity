@@ -3,16 +3,17 @@
 """
 Network Scanning in Python for Cybersecurity
 This script demonstrates various network scanning techniques
-for cybersecurity applications.
+for cybersecurity applications. Perfect for beginners!
 """
 
-import socket
-import threading
-import time
-import sys
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import struct
-import ipaddress
+# Import necessary modules
+import socket                        # For network communication
+import threading                    # For running code in parallel
+import time                         # For time delays
+import sys                          # For system operations
+from concurrent.futures import ThreadPoolExecutor, as_completed  # For multi-threading
+import struct                       # For working with binary data
+import ipaddress                    # For working with IP addresses and networks
 
 # ==========================================
 # 1. Single Port Scanning
@@ -20,17 +21,37 @@ import ipaddress
 print("=== Single Port Scanning ===\n")
 
 def scan_single_port(target_ip, port, timeout=1):
-    """Scan a single port using socket"""
+    """
+    Scan a single TCP port on a target system to check if it's open.
+    
+    Args:
+        target_ip: IP address of the system to scan
+        port: Port number to scan
+        timeout: Time to wait for connection (in seconds, default: 1)
+        
+    Returns:
+        True if port is open, False otherwise
+    """
     try:
+        # Create a TCP socket object
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        
+        # Set timeout for connection attempt
         sock.settimeout(timeout)
+        
+        # Try to connect to the target port
         sock.connect((target_ip, port))
+        
+        # If connection succeeds, port is open
         sock.close()
         return True
+        
     except Exception as e:
+        # If any exception occurs, port is closed or filtered
         return False
 
 # Test single port scan
+# We're scanning localhost (127.0.0.1) which is your own computer
 target = '127.0.0.1'
 port = 80
 
@@ -47,9 +68,23 @@ print()
 print("=== Multi-threaded Port Scanner ===\n")
 
 def scan_range(target_ip, start_port, end_port, threads=50, timeout=1):
-    """Scan a range of ports using multi-threading"""
+    """
+    Scan a range of ports on a target system using multi-threading for faster scanning.
+    
+    Args:
+        target_ip: IP address of the system to scan
+        start_port: First port in range to scan
+        end_port: Last port in range to scan
+        threads: Number of parallel threads to use (default: 50)
+        timeout: Time to wait for connection (in seconds, default: 1)
+        
+    Returns:
+        List of open ports (sorted)
+    """
+    # List to store open ports
     open_ports = []
     
+    # Worker function that scans a single port
     def worker(port):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -58,24 +93,30 @@ def scan_range(target_ip, start_port, end_port, threads=50, timeout=1):
             open_ports.append(port)
             sock.close()
         except:
+            # If port is closed or filtered, we do nothing
             pass
             
+    # Create a thread pool with specified number of workers
     with ThreadPoolExecutor(max_workers=threads) as executor:
+        # Submit all port scanning tasks to the thread pool
         futures = [executor.submit(worker, port) for port in range(start_port, end_port + 1)]
         
-        # Progress indicator
+        # Show progress indicator
         total = end_port - start_port + 1
         completed = 0
         
         for future in as_completed(futures):
             completed += 1
             if completed % 10 == 0:
+                # Update progress in terminal without newline
                 sys.stdout.write(f"\rProgress: {completed}/{total} ({(completed/total)*100:.1f}%)")
                 sys.stdout.flush()
                 
+    # Clear the progress line
     sys.stdout.write("\r" + " " * 50 + "\r")
     sys.stdout.flush()
     
+    # Return open ports sorted in ascending order
     return sorted(open_ports)
 
 # Scan common ports on localhost

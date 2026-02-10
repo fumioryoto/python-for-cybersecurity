@@ -3,14 +3,16 @@
 """
 Modules and Imports in Python for Cybersecurity
 This script demonstrates Python's module system with cybersecurity examples.
+Perfect for beginners!
 """
 
 # ==========================================
-# 1. Module Basics
+# 1. Module Basics - What is a Module?
 # ==========================================
 print("=== Module Basics ===\n")
 
 # Importing entire module
+# A module is a file containing Python code that we can use in other programs
 import socket
 print("Socket module imported")
 print(f"Module name: {socket.__name__}")
@@ -18,16 +20,25 @@ print(f"Module file: {socket.__file__}")
 print()
 
 # Importing specific functions
-from random import randint, choice
+# We can import only the specific functions we need from a module
+from random import randint, choice  # Import randint and choice from random module
 print("Specific functions imported from random module")
+
+# Generate a random port number between 1024 and 65535
 random_port = randint(1024, 65535)
+
+# List of common ports used in cybersecurity
 common_ports = [80, 443, 22, 21, 53]
+
+# Choose a random port from the common ports list
 random_common_port = choice(common_ports)
+
 print(f"Random port: {random_port}")
 print(f"Random common port: {random_common_port}")
 print()
 
 # Importing with alias
+# We can give modules an alias for easier use
 import scapy.all as scapy
 print("Scapy imported with alias 'scapy'")
 print()
@@ -38,58 +49,122 @@ print()
 print("=== Built-in Modules for Cybersecurity ===\n")
 
 # socket module - network programming
+# The socket module is used for network communication
 import socket
 
 def scan_port(ip, port):
-    """Scan a single port using socket module"""
+    """
+    Scan a single port using socket module.
+    
+    Args:
+        ip: IP address to scan
+        port: Port number to scan
+        
+    Returns:
+        True if port is open, False otherwise
+    """
+    # Create a socket object
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+    # Set timeout for connection attempt (1 second)
     sock.settimeout(1)
+    
+    # Try to connect to port
+    # connect_ex() returns error code instead of raising exception
     result = sock.connect_ex((ip, port))
+    
+    # Close the socket
     sock.close()
+    
+    # Return True if port is open (error code 0 means success)
     return result == 0
 
+# Test port scanning on localhost (your own computer)
 print("Socket module port scan:", scan_port("127.0.0.1", 80))
 print()
 
 # hashlib module - cryptographic hashes
+# Used for calculating cryptographic hashes of data
 import hashlib
 
 def calculate_hash(text, algorithm="sha256"):
-    """Calculate hash of text using specified algorithm"""
+    """
+    Calculate cryptographic hash of text using specified algorithm.
+    
+    Args:
+        text: Text to hash
+        algorithm: Hash algorithm to use (default: sha256)
+        
+    Returns:
+        Hexadecimal string of the calculated hash
+    """
+    # Create a hash object for specified algorithm
     hash_obj = hashlib.new(algorithm)
+    
+    # Update hash with text (must be bytes, so we encode the string)
     hash_obj.update(text.encode('utf-8'))
+    
+    # Return hexadecimal representation of hash
     return hash_obj.hexdigest()
 
+# Test hash calculation
 test_text = "password123"
 print(f"SHA-256 of '{test_text}': {calculate_hash(test_text)}")
 print(f"MD5 of '{test_text}': {calculate_hash(test_text, 'md5')}")
 print()
 
 # random module - randomization
+# Used for generating random numbers and values
 import random
 
 def generate_random_ip():
-    """Generate random IPv4 address"""
+    """
+    Generate a random IPv4 address.
+    
+    Returns:
+        Random IPv4 address string (e.g., "192.168.1.100")
+    """
+    # Generate 4 random octets between 1 and 255
     octets = [str(random.randint(1, 255)) for _ in range(4)]
     return ".".join(octets)
 
 def generate_random_mac():
-    """Generate random MAC address"""
+    """
+    Generate a random MAC address.
+    
+    Returns:
+        Random MAC address string (e.g., "00:1A:2B:3C:4D:5E")
+    """
     hex_chars = "0123456789ABCDEF"
-    return ":".join("".join(random.sample(hex_chars, 2)) for _ in range(6))
+    # Generate 6 pairs of hexadecimal characters
+    mac = ":".join("".join(random.sample(hex_chars, 2)) for _ in range(6))
+    return mac
 
+# Test random generation functions
 print("Random IP:", generate_random_ip())
 print("Random MAC:", generate_random_mac())
 print()
 
 # datetime module - timestamps and dates
+# Used for working with dates, times, and timestamps
 import datetime
 
 def log_event(event, severity="INFO"):
-    """Log event with timestamp"""
+    """
+    Log an event with timestamp and severity.
+    
+    Args:
+        event: Event description to log
+        severity: Severity level (default: INFO)
+        
+    Returns:
+        Formatted log string with timestamp
+    """
+    # Get current time with milliseconds
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
     return f"[{timestamp}] [{severity.upper()}] {event}"
 
+# Test log event function
 print(log_event("Network scan completed"))
 print(log_event("Vulnerability detected", "CRITICAL"))
 print()

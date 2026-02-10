@@ -1,40 +1,88 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Socket Programming in Python for Cybersecurity
+Socket Programming in Python for Cybersecurity - BEGINNER FRIENDLY
 This script demonstrates socket programming for network communication
-and security applications.
+and security applications. Each concept is explained in simple terms
+so beginners can understand how computers communicate over networks.
+
+Socket programming is the foundation of network security tools like:
+- Port scanners
+- Network sniffers
+- Vulnerability scanners
+- Exploit tools
+
+Perfect for cybersecurity beginners!
 """
 
-import socket
-import sys
-import threading
-import time
-import struct
-from datetime import datetime
+# ========================================================================
+# Import necessary modules - THE TOOLS WE NEED!
+# ========================================================================
+import socket        # For network communication (creating connections)
+import sys           # For system operations and error handling
+import threading     # For running code in parallel (multiple connections)
+import time          # For time delays and timeout operations
+import struct        # For working with binary data (raw network packets)
+from datetime import datetime  # For time and date operations
 
-# ==========================================
-# 1. TCP Socket Basics
-# ==========================================
+# ========================================================================
+# 1. TCP Socket Basics (Client-Server Communication) - THE FUNDAMENTALS!
+# ========================================================================
+# Imagine sockets as "phone lines" between computers. TCP (Transmission 
+# Control Protocol) is like a reliable phone call - it guarantees data 
+# arrives correctly and in order.
 print("=== TCP Socket Basics ===\n")
 
-# TCP Server example
+# ------------------------------------------------------------------------
+# TCP Server example - LISTENING FOR CONNECTIONS
+# ------------------------------------------------------------------------
+# A server listens for incoming connections, like a phone on a desk.
 def tcp_server(host='localhost', port=12345):
-    """Simple TCP server that responds to client connections"""
+    """
+    Simple TCP server that listens for connections and responds to clients.
+    
+    Args:
+        host: IP address to listen on (default: localhost/127.0.0.1 - your own computer)
+        port: Port number to listen on (default: 12345 - a safe testing port)
+    """
     try:
+        # Step 1: Create a TCP socket object - THE PHONE
+        # socket.AF_INET means IPv4 network (the most common)
+        # socket.SOCK_STREAM means TCP connection (reliable, connection-oriented)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            
+            # Step 2: Bind the socket to a specific host and port - SET UP THE PHONE LINE
+            # This tells the OS: "Listen for calls on this specific number"
             s.bind((host, port))
+            
+            # Step 3: Start listening for connections - WAITING FOR CALLS
+            # 5 is the backlog (maximum number of pending connections to queue)
             s.listen(5)
             print(f"TCP server listening on {host}:{port}")
+            print(f"(Like a phone waiting for calls on extension {port})")
             
+            # Step 4: Wait for a connection - THE PHONE RINGS!
+            # This is a blocking operation (the program stops here until someone connects)
             conn, addr = s.accept()
+            
+            # Connection established! - CALL ACCEPTED!
             with conn:
-                print(f"Connected by {addr}")
+                print(f"\nConnected by {addr}")
+                print(f"(Someone from {addr[0]} called on port {addr[1]})")
+                
+                # Keep communication open
                 while True:
+                    # Receive data from client (maximum 1024 bytes)
                     data = conn.recv(1024)
+                    
+                    # If no data is received, client has disconnected
                     if not data:
                         break
+                        
+                    # Decode and print received data
                     print(f"Received: {data.decode('utf-8')}")
+                    
+                    # Echo back the received data to client
                     conn.sendall(data)
                     
     except Exception as e:
@@ -42,22 +90,45 @@ def tcp_server(host='localhost', port=12345):
 
 # TCP Client example
 def tcp_client(host='localhost', port=12345):
-    """Simple TCP client that sends data to server"""
+    """
+    Simple TCP client that connects to a server and sends data.
+    
+    Args:
+        host: IP address of server to connect to (default: localhost/127.0.0.1)
+        port: Port number to connect to (default: 12345)
+    """
     try:
+        # Create a TCP socket object
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            
+            # Connect to the server
             s.connect((host, port))
+            
+            # Create a message to send to server
             message = f"Hello from client at {datetime.now().isoformat()}"
+            
+            # Send the message to server
+            # .encode('utf-8') converts string to bytes
             s.sendall(message.encode('utf-8'))
+            
+            # Receive response from server
             data = s.recv(1024)
+            
+            # Print received response
             print(f"Received from server: {data.decode('utf-8')}")
             
     except Exception as e:
         print(f"TCP client error: {e}")
 
 # Run TCP server and client in separate threads
+# We use threads so server and client can run at the same time
 server_thread = threading.Thread(target=tcp_server, daemon=True)
 server_thread.start()
+
+# Wait a second for server to start listening
 time.sleep(1)
+
+# Run the client to send a message to server
 tcp_client()
 
 print()

@@ -1,89 +1,141 @@
-# Python for Cybersecurity - Dependencies
-# This file lists all the required Python packages for the lessons and projects
+# Python All Things - Required Libraries
+# This file contains all the Python libraries you'll need for cybersecurity development
 
-# Core Python packages (usually included in standard library)
-# - argparse (built-in)
-# - os (built-in)
-# - sys (built-in)
-# - re (built-in)
-# - json (built-in)
-# - csv (built-in)
-# - configparser (built-in)
-# - datetime (built-in)
-# - time (built-in)
-# - threading (built-in)
-# - multiprocessing (built-in)
-# - socket (built-in)
-# - hashlib (built-in)
-# - random (built-in)
+# ============================
+# Core Security Libraries
+# ============================
+requests>=2.31.0          # For HTTP requests and API interaction
+beautifulsoup4>=4.12.0    # For web scraping and HTML parsing
+lxml>=4.9.0              # For XML and HTML parsing
+cryptography>=40.0.0     # For encryption and cryptography operations
+hashlib                  # Built-in - For hashing functions
+hmac                     # Built-in - For message authentication codes
+base64                   # Built-in - For encoding/decoding binary data
 
-# Data analysis and visualization
-matplotlib>=3.3.0
-numpy>=1.19.0
-pandas>=1.1.0
-scipy>=1.5.0
+# ============================
+# Networking Libraries
+# ============================
+socket                   # Built-in - For socket programming
+struct                   # Built-in - For working with binary data
+ipaddress                # Built-in - For IP address manipulation
+scapy>=2.4.0             # For packet manipulation and network analysis
+pcapy>=0.11.0            # For packet capture
+netaddr>=0.8.0           # For network address handling
+dnslib>=0.9.0            # For DNS packet manipulation
 
-# Network programming and packet capture
-scapy>=2.4.4
-pyshark>=0.4.2.11
+# ============================
+# Web Security Libraries
+# ============================
+requests-html>=0.10.0    # For rendering JavaScript-heavy pages
+selenium>=4.8.0          # For browser automation
+webdriver-manager>=4.0.0 # For managing browser drivers
+html5lib>=1.1            # For HTML parsing
+urllib3>=2.0.0           # For URL handling
 
-# Web scraping and HTTP
-requests>=2.24.0
-beautifulsoup4>=4.9.0
-lxml>=4.5.0
-selenium>=3.141.0
+# ============================
+# Binary Analysis Libraries
+# ============================
+pefile>=2023.2.7         # For PE file analysis (Windows executables)
+lief>=0.12.0             # For PE, ELF, and Mach-O file parsing
+capstone>=4.0.0          # For disassembly
+keystone-engine>=0.9.0   # For assembly
+unicorn>=2.0.0           # For emulation
+yara-python>=4.2.0       # For malware detection
+pyelftools>=0.29         # For ELF file parsing
 
-# Cryptography and security
-cryptography>=3.1
-pycryptodome>=3.9.0
-hashlib (built-in, but listed for reference)
-hmac (built-in, but listed for reference)
+# ============================
+# Data Analysis Libraries
+# ============================
+pandas>=1.5.0            # For data analysis and manipulation
+numpy>=1.24.0            # For numerical operations
+scipy>=1.10.0            # For scientific computing
+matplotlib>=3.7.0        # For data visualization
+seaborn>=0.12.0          # For statistical visualization
+plotly>=5.13.0           # For interactive plots
 
-# File and data formats
-yaml>=5.3.0
-toml>=0.10.0
-xmltodict>=0.12.0
-openpyxl>=3.0.0
-python-docx>=0.8.10
+# ============================
+# Machine Learning Libraries
+# ============================
+scikit-learn>=1.2.0      # For machine learning algorithms
+scikit-image>=0.19.0     # For image processing
+tensorflow>=2.12.0       # For deep learning
+keras>=2.12.0            # For neural networks
+xgboost>=1.7.0           # For gradient boosting
+lightgbm>=3.3.0          # For gradient boosting
 
-# System and process management
-psutil>=5.7.0
-win32api ; sys_platform == 'win32'
-win32con ; sys_platform == 'win32'
-win32gui ; sys_platform == 'win32'
+# ============================
+# Database Libraries
+# ============================
+sqlalchemy>=2.0.0        # For SQL database interaction
+psycopg2-binary>=2.9.0   # For PostgreSQL (if needed)
+mysql-connector-python>=8.0.0 # For MySQL
+sqlite3                  # Built-in - For SQLite
 
-# Database access
-sqlite3 (built-in)
-mysql-connector-python>=8.0.0
-psycopg2-binary>=2.8.0
-sqlalchemy>=1.3.0
+# ============================
+# System and Automation Libraries
+# ============================
+subprocess               # Built-in - For running external commands
+os                       # Built-in - For OS operations
+sys                      # Built-in - For system operations
+threading                # Built-in - For multi-threading
+multiprocessing          # Built-in - For multi-processing
+time                     # Built-in - For time operations
+datetime                 # Built-in - For date/time operations
+json                     # Built-in - For JSON processing
+csv                      # Built-in - For CSV processing
+configparser             # Built-in - For configuration files
+logging                  # Built-in - For logging
 
-# Machine learning and data analysis
-scikit-learn>=0.23.0
-tensorflow>=2.3.0
-keras>=2.4.0
-nltk>=3.5
+# ============================
+# Security Tools Libraries
+# ============================
+pycryptodome>=3.17.0     # For additional cryptography operations
+pyjwt>=2.6.0             # For JSON Web Tokens
+cryptodomex>=3.17.0      # For extended cryptography
+paramiko>=2.12.0         # For SSH protocol
+netifaces>=0.11.0        # For network interface information
+psutil>=5.9.0            # For system monitoring
 
-# Debugging and reverse engineering
-pefile>=2019.4.18
-capstone>=4.0.0
-keystone-engine>=0.9.1
+# ============================
+# Reverse Engineering Libraries
+# ============================
+angr>=9.0.0              # For binary analysis
+binaryninja-api>=3.0.0   # For Binary Ninja integration
+idaapi                   # For IDA Pro integration (commercial)
+frida-tools>=12.0.0      # For dynamic instrumentation
+radare2>=5.8.0           # For binary analysis and disassembly
 
-# Network security and penetration testing
-paramiko>=2.7.0
-netmiko>=3.2.0
-pynacl>=1.4.0
-pysnmp>=4.4.0
-scapy-http>=0.1.6
+# ============================
+# Miscellaneous Libraries
+# ============================
+python-magic>=0.4.0      # For file type detection
+pillow>=9.5.0            # For image processing
+pytesseract>=0.3.10      # For OCR (Optical Character Recognition)
+pdfplumber>=0.9.0        # For PDF processing
+docx2txt>=0.8.0          # For DOCX processing
+python-pptx>=0.6.0       # For PPTX processing
 
-# Other useful packages
-python-dotenv>=0.14.0
-colorama>=0.4.3
-tqdm>=4.47.0
-click>=7.0.0
+# ============================
+# Development and Debugging Libraries
+# ============================
+pytest>=7.2.0            # For testing
+pytest-cov>=4.0.0        # For test coverage
+flake8>=6.0.0            # For code linting
+black>=23.0.0            # For code formatting
+mypy>=1.0.0              # For type checking
 
-# Development and testing
-pytest>=6.0.0
-flake8>=3.8.0
-black>=19.10.0
-mypy>=0.780
+# ============================
+# Documentation Libraries
+# ============================
+sphinx>=6.0.0            # For documentation generation
+sphinx-rtd-theme>=1.2.0  # For Read the Docs theme
+
+# ============================
+# Additional Security Libraries
+# ============================
+virustotal-api>=1.1.0    # For VirusTotal API interaction
+shodan>=1.30.0           # For Shodan API interaction
+censys>=2.0.0            # For Censys API interaction
+zoomeye-api>=1.1.0       # For ZoomEye API interaction
+maltiverse-api>=1.0.0    # For Maltiverse API interaction
+abuseipdb>=1.2.0         # For AbuseIPDB API interaction

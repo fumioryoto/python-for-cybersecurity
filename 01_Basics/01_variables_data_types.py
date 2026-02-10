@@ -1,53 +1,91 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Variables and Data Types in Python
+Variables and Data Types in Python - BEGINNER FRIENDLY
 This script demonstrates Python's basic data types and variable usage
-with cybersecurity-relevant examples.
+with cybersecurity-relevant examples. Each concept is explained in
+simple terms so beginners can understand.
 """
 
-# ==========================================
-# 1. Variables and Basic Data Types
-# ==========================================
+# ========================================================================
+# 1. Variables and Basic Data Types - THE BUILDING BLOCKS!
+# ========================================================================
+# Imagine variables as containers that hold information. Python has 4 main
+# basic data types that you'll use ALL THE TIME in cybersecurity!
 print("=== Variables and Basic Data Types ===\n")
 
-# Integer - Whole numbers (used for port numbers, counts, etc.)
-port_number = 80  # HTTP port
+# ------------------------------------------------------------------------
+# INTEGERS - Whole numbers without decimals
+# ------------------------------------------------------------------------
+# Integers are used for:
+# - Port numbers (like 80 for HTTP, 443 for HTTPS)
+# - Counts of packets, connections, or vulnerabilities
+# - IP address octets (192, 168, 1, 1)
+# - File sizes and offsets
+
+port_number = 80  # HTTP port (this is an integer variable)
 print(f"Port number (int): {port_number}")
-print(f"Type: {type(port_number)}")
+print(f"Type: {type(port_number)}")  # Shows it's an integer
 print()
 
-# Float - Decimal numbers (used for measurements, calculations)
-packet_loss = 0.05  # 5% packet loss
+# ------------------------------------------------------------------------
+# FLOATS - Numbers with decimal points
+# ------------------------------------------------------------------------
+# Floats are used for:
+# - Packet loss percentages (5% = 0.05)
+# - Network speeds in Mbps/Gbps
+# - Version numbers (Python 3.10)
+# - Time delays
+
+packet_loss = 0.05  # 5% packet loss (this is a float variable)
 print(f"Packet loss (float): {packet_loss}")
-print(f"Type: {type(packet_loss)}")
+print(f"Type: {type(packet_loss)}")  # Shows it's a float
 print()
 
-# String - Text data (used for IP addresses, domain names, filenames)
-ip_address = "192.168.1.1"  # IPv4 address
-domain = "example.com"
+# ------------------------------------------------------------------------
+# STRINGS - Text and character data
+# ------------------------------------------------------------------------
+# Strings are used for:
+# - IP addresses ("192.168.1.1")
+# - Domain names ("example.com")
+# - URLs ("https://malicious-site.com")
+# - File paths ("/var/logs/access.log")
+# - Command outputs
+
+ip_address = "192.168.1.1"  # IPv4 address (this is a string)
+domain = "example.com"      # Domain name (also a string)
 print(f"IP Address (str): {ip_address}")
 print(f"Domain (str): {domain}")
-print(f"Type: {type(ip_address)}")
+print(f"Type: {type(ip_address)}")  # Shows it's a string
 print()
 
-# Boolean - True/False values (used for flags, conditions)
-connection_established = True
-vulnerable = False
+# ------------------------------------------------------------------------
+# BOOLEANS - True/False values (YES/NO flags)
+# ------------------------------------------------------------------------
+# Booleans are used for:
+# - Checking if a connection is established
+# - Verifying if a system is vulnerable
+# - Determining if a file exists
+# - Flagging suspicious activity
+
+connection_established = True  # Connection is active
+vulnerable = False             # System is NOT vulnerable
 print(f"Connection established (bool): {connection_established}")
 print(f"Vulnerable (bool): {vulnerable}")
-print(f"Type: {type(connection_established)}")
+print(f"Type: {type(connection_established)}")  # Shows it's a boolean
 print()
 
-# ==========================================
-# 2. Type Conversion (Casting)
-# ==========================================
+# ========================================================================
+# 2. Type Conversion (Casting) - CHANGING ONE TYPE TO ANOTHER!
+# ========================================================================
+# Often, you need to convert one type to another. For example, when you
+# want to combine a number (port 80) with text ("Port: 80").
 print("=== Type Conversion ===\n")
 
-# Convert integer to string (common when constructing commands)
-port_str = str(port_number)
+# Convert integer to string (common when constructing messages/commands)
+port_str = str(port_number)  # Converts 80 (integer) to "80" (string)
 print(f"Port as string: '{port_str}'")
-print(f"Type: {type(port_str)}")
+print(f"Type: {type(port_str)}")  # Now it's a string!
 print()
 
 # Convert string to integer (when reading from configuration files)
