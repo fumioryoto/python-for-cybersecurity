@@ -1,0 +1,89 @@
+# Python for Cybersecurity - Dependencies
+# This file lists all the required Python packages for the lessons and projects
+
+# Core Python packages (usually included in standard library)
+# - argparse (built-in)
+# - os (built-in)
+# - sys (built-in)
+# - re (built-in)
+# - json (built-in)
+# - csv (built-in)
+# - configparser (built-in)
+# - datetime (built-in)
+# - time (built-in)
+# - threading (built-in)
+# - multiprocessing (built-in)
+# - socket (built-in)
+# - hashlib (built-in)
+# - random (built-in)
+
+# Data analysis and visualization
+matplotlib>=3.3.0
+numpy>=1.19.0
+pandas>=1.1.0
+scipy>=1.5.0
+
+# Network programming and packet capture
+scapy>=2.4.4
+pyshark>=0.4.2.11
+
+# Web scraping and HTTP
+requests>=2.24.0
+beautifulsoup4>=4.9.0
+lxml>=4.5.0
+selenium>=3.141.0
+
+# Cryptography and security
+cryptography>=3.1
+pycryptodome>=3.9.0
+hashlib (built-in, but listed for reference)
+hmac (built-in, but listed for reference)
+
+# File and data formats
+yaml>=5.3.0
+toml>=0.10.0
+xmltodict>=0.12.0
+openpyxl>=3.0.0
+python-docx>=0.8.10
+
+# System and process management
+psutil>=5.7.0
+win32api ; sys_platform == 'win32'
+win32con ; sys_platform == 'win32'
+win32gui ; sys_platform == 'win32'
+
+# Database access
+sqlite3 (built-in)
+mysql-connector-python>=8.0.0
+psycopg2-binary>=2.8.0
+sqlalchemy>=1.3.0
+
+# Machine learning and data analysis
+scikit-learn>=0.23.0
+tensorflow>=2.3.0
+keras>=2.4.0
+nltk>=3.5
+
+# Debugging and reverse engineering
+pefile>=2019.4.18
+capstone>=4.0.0
+keystone-engine>=0.9.1
+
+# Network security and penetration testing
+paramiko>=2.7.0
+netmiko>=3.2.0
+pynacl>=1.4.0
+pysnmp>=4.4.0
+scapy-http>=0.1.6
+
+# Other useful packages
+python-dotenv>=0.14.0
+colorama>=0.4.3
+tqdm>=4.47.0
+click>=7.0.0
+
+# Development and testing
+pytest>=6.0.0
+flake8>=3.8.0
+black>=19.10.0
+mypy>=0.780
